@@ -25,14 +25,14 @@ function RequestLimitValidatorHandler:access(conf)
 
   if err_uri_args == "truncated" then
     -- 414 is url too long
-    responses.send((expect100continue ? 417 : 414), "Too many query parameters!")
+    responses.send((expect100continue and 417 or 414), "Too many query parameters!")
   end
 
   local _, err_post_args = ngx.req.get_post_args(conf.allowed_number_post_args)
 
   if err_post_args == "truncated" then
     -- 413 is payload too large
-    responses.send((expect100continue ? 417 : 413), "Too many post parameters!")
+    responses.send((expect100continue and 417 or 414), "Too many post parameters!")
   end
 end
 

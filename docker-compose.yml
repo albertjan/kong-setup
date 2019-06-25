@@ -33,7 +33,7 @@ services:
       - "KONG_PROXY_LISTEN=0.0.0.0:80"
       - "KONG_ADMIN_LISTEN=0.0.0.0:8001"
       - "KONG_LUA_PACKAGE_PATH=/opt/babylon/?.lua"
-      - "KONG_CUSTOM_PLUGIN=request-limit-validator"
+      - "KONG_CUSTOM_PLUGINS=request-limit-validator"
     ports:
       - "8443:443"
       - "8000:80"
