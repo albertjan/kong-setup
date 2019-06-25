@@ -24,7 +24,7 @@ services:
       - "5432:5432"
 
   kong:
-    image: "kong:0.13.1-alpine"
+    build: "."
     environment:
       - "KONG_PG_HOST=postgres"
       - "KONG_PG_DATABASE=kong"
@@ -32,6 +32,7 @@ services:
       - "KONG_PG_PASSWORD=password"
       - "KONG_PROXY_LISTEN=0.0.0.0:80"
       - "KONG_ADMIN_LISTEN=0.0.0.0:8001"
+      - "ENV KONG_LUA_PACKAGE_PATH=/opt/babylon/?.lua;;"
     ports:
       - "8443:443"
       - "8000:80"
