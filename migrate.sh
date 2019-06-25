@@ -7,4 +7,4 @@ docker run --rm \
     -e "KONG_PG_USER=kong" \
     -e "KONG_PG_PASSWORD=password" \
     -e "KONG_CASSANDRA_CONTACT_POINTS=kong-database" \
-    "kong:0.13.1-alpine" kong migrations up --v
+    "kong-local:latest" kong migrations up --v
