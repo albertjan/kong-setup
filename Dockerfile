@@ -2,9 +2,9 @@ FROM kong:0.13.1-alpine
 
 ADD request-limit-validator /opt/babylon/plugins/request-limit-validator
 
-WORKDIR /opt/babylon
+WORKDIR /opt/babylon/plugins/request-limit-validator
 RUN ls -R .
-RUN luarocks make ./plugins/request-limit-validator/request-limit-validator-dev-1.rockspec
+RUN luarocks make request-limit-validator-dev-1.rockspec
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 

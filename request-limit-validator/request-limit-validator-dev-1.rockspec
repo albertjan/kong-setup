@@ -14,7 +14,7 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-      ["kong.plugins.request-limit-validator.handler"] = "handler.lua",
-      ["kong.plugins.request-limit-validator.schema"] = "schema.lua"
+      ["kong.plugins.request-limit-validator.handler"] = "./handler.lua",
+      ["kong.plugins.request-limit-validator.schema"] = "./schema.lua"
    }
 }
