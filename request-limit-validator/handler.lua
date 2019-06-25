@@ -14,25 +14,42 @@ function RequestLimitValidatorHandler:new()
   RequestLimitValidatorHandler.super.new(self, "request-size-limiting")
 end
 
+function countArgs(table)
+  local cur = 0
+  for k, v in ipairs(table) do
+    if type(v) == "table" then
+      cur = cur + #v
+    else
+      cur = cur + 1
+    end
+  end
+  return cur
+end
+
 function RequestLimitValidatorHandler:access(conf)
   RequestLimitValidatorHandler.super.access(self)
-  local _, err_uri_args = ngx.req.get_uri_args(conf.allowed_number_query_args)
+  local args, err_uri_args = ngx.req.get_uri_args(conf.allowed_number_query_args + 1)
   local expect100continue = false
+  local headers = ngx.req.get_headers()
 
   if headers.expect and strip(headers.expect:lower()) == "100-continue" then
     expect100continue = true
   end
 
-  if err_uri_args == "truncated" then
+
+  if countArgs(args) == 101 then
     -- 414 is url too long
     responses.send((expect100continue and 417 or 414), "Too many query parameters!")
   end
 
-  local _, err_post_args = ngx.req.get_post_args(conf.allowed_number_post_args)
+  if headers["content-type"] == "application/x-www-form-urlencoded" then
+    ngx.req.read_body()
+    local args, err_post_args = ngx.req.get_post_args(conf.allowed_number_post_args + 1)
 
-  if err_post_args == "truncated" then
-    -- 413 is payload too large
-    responses.send((expect100continue and 417 or 414), "Too many post parameters!")
+    if countArgs(args) == 101 then
+      -- 413 is payload too large
+      responses.send((expect100continue and 417 or 414), "Too many post parameters!")
+    end
   end
 end
 
