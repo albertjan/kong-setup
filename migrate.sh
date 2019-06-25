@@ -1,6 +1,7 @@
+#!/bin/bash
 docker run --rm \
-    --net  kong-max-query-params_default \
-    --link kong-max-query-params_postgres_1:kong-database \
+    --net  $1 \
+    --link $2:kong-database \
     -e "KONG_DATABASE=postgres" \
     -e "KONG_PG_HOST=kong-database" \
     -e "KONG_PG_USER=kong" \
