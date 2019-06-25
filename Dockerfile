@@ -1,6 +1,6 @@
 FROM kong:0.13.1-alpine
 
-ADD request-limit-validator /opt/babylon/plugins/
+ADD request-limit-validator /opt/babylon/plugins/request-limit-validator
 
 WORKDIR /opt/babylon
 RUN ls -R .
