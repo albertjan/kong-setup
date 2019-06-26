@@ -1,8 +1,8 @@
 package = "request-limit-validator"
-version = "dev-1"
+version = "0.1.0"
 local pluginName = "request-limit-validator"
 source = {
-   url = "git+ssh://git@github.com/albertjan/kong-setup.git"
+   url = "git+ssh://git@github.com/Babylonpartners/request-limit-validator.git"
 }
 description = {
    homepage = "https://github.com/Babylonpartners/request-limit-validator",
