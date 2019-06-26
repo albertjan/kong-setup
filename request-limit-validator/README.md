@@ -11,7 +11,7 @@ You can use the Kong Dashboard to configure these parameters.
 There are two config options to limit the GET and POST parameters:
 
 - `allowed_number_query_args`: *Default 100*,
-- `allowed_number_post_args` = *Default 100*,
+- `allowed_number_post_args`: *Default 100*,
 
 Note, you should ensure these values match the values used in Kong `request-transformer` (default 100 in this plugin).  Otherwise, the `request-transformer` plugin will end up silently stripping arguments without failure.
 
